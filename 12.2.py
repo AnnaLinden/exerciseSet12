@@ -16,13 +16,14 @@ def get_city_name():
     return city
 
 
-def get_temp_in_kelvin(city):
-    request = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=0ed541848a79ebc81ee98bea04f8942b"
+def get_temp_in_kelvin(city,key):
+    request = "https://api.openweathermap.org/data/2.5/weather?q=" + city + f"&APPID={key}"
     response = requests.get(request).json()
     kelvin = response['main']['temp']
     return kelvin
 
 
 city = get_city_name()
-celsius = kelvin_to_celsius(get_temp_in_kelvin(city))
+key = input("Enter your API key: ")
+celsius = kelvin_to_celsius(get_temp_in_kelvin(city,key))
 print(f"The temperature in {city} is {round(celsius, 1)} degrees Celsius.")
